@@ -4,15 +4,16 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
 import InputText from '../../components/InputText';
-import {  MdArrowRightAlt } from 'react-icons/md';
+import { MdArrowRightAlt } from 'react-icons/md';
 import GoogleIcon from '../../components/GoogleIcon';
 import ButtonLarge from '../../components/ButtonLarge';
 import { useFormik } from 'formik';
 import CheckBox from '../../components/CheckBox';
+import SelectorMenu from '../../components/SelectorMenu';
 const SignUp: React.FC = () => {
   const [itemFormWidth, setItemFormWidth] = useState(0);
   const wrapperFieldForm = useRef<HTMLDivElement | null>(null);
-
+  const [data, setDatas] = useState({})
   useEffect(() => {
     let itemsForm;
     for (itemsForm of wrapperFieldForm.current?.children!) {
@@ -36,6 +37,9 @@ const SignUp: React.FC = () => {
   return (
     <>
       <Breadcrumb pageName="Sign Up" />
+      <pre>
+        {JSON.stringify(data, null, 2)}
+      </pre>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="w-full border-stroke  xl:w-1/2  mx-auto">
@@ -76,7 +80,10 @@ const SignUp: React.FC = () => {
                     </div>
                   </div>
                   <div className="form-item inline-block px-2">
-                    <div className="info">
+                    <div>
+                        <div className='relative'>
+                          <div className="w-8 h-8 rounded-full bg-gray-2"></div>
+                        </div>
                       <h2 className="bold text-gray-700 uppercase text-center mb-4 dark:text-white">Dados Acâdemico</h2>
                     </div>
                     <div className="form-item flex flex-wrap">
@@ -96,36 +103,36 @@ const SignUp: React.FC = () => {
                         <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                           Ano
                         </label>
-                        <select
+                        <SelectorMenu
                           value={values.ano}
                           name="ano"
-                          onChange={handleChange}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 focus:ring-4 dark:focus:border-blue-500">
-                          <option selected>Escolher a turma</option>
-                          <option value="1">1º ano</option>
-                          <option value="2">2º ano</option>
-                          <option value="3">3º ano</option>
-                          <option value="4">4 º ano</option>
-                          <option value="5">5 º ano</option>
-                        </select>
+                          onChange={handleChange} options={[
+                            { label: "Escolher a turma", value: "" },
+                            { label: "1º ano", value: "2" },
+                            { label: "2º ano", value: "2" },
+                            { label: "3º ano", value: "3" },
+                            { label: "4º ano", value: "4" },
+                            { label: "5º ano", value: "5" },
+
+                          ]} />
                       </div>
                       <div className="mb-5  w-1/2 pl-2">
                         <label htmlFor="turma" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                           Turma
                         </label>
-                        <select
+                        <SelectorMenu
                           name="turma"
                           id="turma"
                           value={values.turma}
                           onChange={handleChange}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 focus:ring-4 dark:focus:border-blue-500">
-                          <option selected>Escolher a turma</option>
-                          <option value="A">A</option>
-                          <option value="B">B</option>
-                          <option value="C">C</option>
-                          <option value="D">D</option>
-                          <option value="E">E</option>
-                        </select>
+                          options={[
+                            { label: "Escolher a turma", value: "" },
+                            { label: "Turma A", value: "A" },
+                            { label: "Turma B", value: "B" },
+                            { label: "Turma C", value: "C" },
+                            { label: "Turma D", value: "D" },
+                            { label: "Turma E", value: "E" },
+                          ]} />
                       </div>
                     </div>
                   </div>
